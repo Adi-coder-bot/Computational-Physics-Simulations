@@ -1,0 +1,1 @@
+In order to run the codes of Djnago, go in the root directory(the one containing manage.py) using powershell and enter python manage.py runserver. This will generate a localhost link. Open that link in any Browser of your liking, like Chrome, Firefox, etc.
