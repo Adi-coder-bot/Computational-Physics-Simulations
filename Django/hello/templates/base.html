@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}  {% endblock title %} | This is a test website.</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            height: 10vh;
+            width: 100vw;
+            background-color: aquamarine;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        a{
+            text-decoration: none;
+            color: brown;
+        }
+        header h1{
+            color: rgb(241, 168, 73);
+        }
+        .heading{
+            font-size: 20px;            
+        }
+        .navbar{
+            height: 10vh;
+            width: 40vw;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .navbar div{
+            height: 60px;
+            width: 90px;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .form{
+            height: 90vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        form{
+            height: 70vh;
+            width: 80vw;
+            background-color: antiquewhite;
+            color: blue;
+            padding: 2vw;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        form div{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .submit{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #button{
+            height: 50px;
+            width: 100px;
+            background-color: aquamarine;
+        }
+        #button:hover{
+            background-color: rgb(168, 251, 223);
+            border-color: beige;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aditya Icecreams</h1>
+        <div class="navbar">
+            <div ><a href="/about">About us</a></div>
+            <div ><a href="/services">Services Provided</a></div>
+            <div ><a href="/contact">Contact us</a></div>
+        </div>
+    </header>
+    <main>
+        {% block body %} {% endblock body %}
+    </main>
+    <footer></footer>
+</body>
+</html>
