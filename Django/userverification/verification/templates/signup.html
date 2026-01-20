@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="block">
+        {% block form %}
+            {% if t == 'login' %}
+                <h1>User Data</h1>
+                <br>
+                <div class="form">
+                    {% for num in response %}
+                    <div class="a">
+                        <h2>{{num.name}}</h2>
+                        <span>{{num.value}}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h1>{{N.heading}}</h1>
+                <br>
+                <form action="{% url N.name %}" method="post" class="form">
+                    {% csrf_token %}
+                    {% for type in typ %}
+                        <div>
+                            {% if type.name == 'password' %}
+                            <label for="{{type.name}}">{{type.label}}:-</label>
+                            <input type="{{type.type}}" name="{{type.name}}" id="{{type.name}}" placeholder="Enter {{type.label}} here..." required>
+                            {% else %}
+                            <label for="{{type.name}}">{{type.label}}:-</label>
+                            <input type="{{type.type}}" name="{{type.name}}" id="{{type.name}}" placeholder="Enter {{type.label}} here...">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" name="submit" id="submit">
+                </form>
+            {% endif %}
+        {% endblock form %}
+        {% if messages %}
+            {% for message in messages %}
+                <script>
+                    alert("{{message}}")
+                </script>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
