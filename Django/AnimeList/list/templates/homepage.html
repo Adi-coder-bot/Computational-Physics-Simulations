@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/favicon.jpg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% block extra_css %}
+        
+    {% endblock extra_css %}
+    <title>AnimeList</title>
+</head>
+<body>
+    <header>
+        {% block title %}
+            <form action="{% url 'search' %}" method="get" id="searchbar">
+                <div>
+                    <input type="text" name="anime_name" id="anime_name" placeholder="Search anime here..." data-url="{% url 'Homepageform' version='Login' %}">
+                </div>
+                <input type="submit" id="hs" value="Search" data-email="{{user.email}}">
+            </form>
+            <div class="suggestions">
+                
+            </div>
+            <h1 id="title">AnimeList</h1>
+        {% endblock title %}
+        <div class="userinfo">
+            {% if user %}
+            <div class="cover">
+                <img src="{{user.userimage.url}}" alt="{{user.name}}">
+            </div>
+            {% else %}
+            <div class="cover">
+                <img src="#" alt="userimage">
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    <div class="extra">
+        <img src="{{user.userimage.url}}" alt="{{user.name}}">
+        <div class="name"><h3>Name:-</h3><p>{{user.name}}</p></div>
+        <div class="name"><h3>Email:-</h3><p>{{user.email}}</p></div>
+        <div class="animename">
+            <h3>Currently watching anime:-</h3>
+            <div>
+                {% for s in sections %}
+                    {% if s.heading == "Currently Watching" %}
+                        {% for a in s.animelist %}
+                            <p>{{a.anime.name}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div id="logout">
+            <button type="button" data-url="{% url 'logout' %}">Logout?</button>
+        </div>
+    </div>
+    <main>
+        {% block main %}
+        {% for section in sections %}  
+        <section>
+            <h2>{{section.heading}}</h2>
+            <div class="content">
+                {% for entry in section.animelist %}
+                <div class="list" data-url="{% url 'animes' email=user.email id=entry.anime.id %}">  
+                    <img src="{{entry.anime.cliphanger.url}}" alt="animeimg">
+                    <div class="name">{{entry.anime.name}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+        <div class="form">
+                <h1>{{version.name}}</h1>
+                <form action="{% url 'Homepageform' version=version.url %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for quality in version.qualities %}
+                        <div>
+                            <label for="{{quality.name}}">{{quality.heading}}:-</label>
+                            {% if quality.type == 'file' %}
+                            <input type="{{quality.type}}" name="{{quality.name}}" placeholder="Enter {{quality.heading}} here..." accept="image/*" required>
+                            {% else %}
+                            <input type="{{quality.type}}" name="{{quality.name}}" placeholder="Enter {{quality.heading}} here..." required>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="change">
+                        {% if version.name == "Login" %}
+                            <p data-url="{% url 'Homepageform' version='Sign_up' %}">Sign Up?</p>
+                        {% else %}
+                            <p data-url="{% url 'Homepageform' version='Login' %}">Login?</p>
+                        {% endif %}
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+            {% if messages %}
+                <div class="message">
+                    {% for message in messages %}
+                    <script>
+                        alert("{{message}}")
+                    </script>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endblock main %}
+    <div id="overlay"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 AnimeList. All rights reserved</p>
+    </footer>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

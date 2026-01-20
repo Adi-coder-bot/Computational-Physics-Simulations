@@ -1,0 +1,38 @@
+{% extends "homepage.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'animestyle.css' %}">
+{% endblock extra_css %}
+{% block title %}
+    <div class="nothing"></div>
+    <h1 id="title">Anime Details</h1>
+{% endblock title %}
+{% block main %}
+    <div class="details">
+        <div class="up">
+            <img src="{{Anime.cliphanger.url}}" alt="animeimg">
+            <div class="name"><p>{{Anime.name}}</p></div>
+            <div class="genres">
+                <h2>Genres:-</h2>
+                <ul>
+                    {% for genre in Anime.genres.all %}
+                        <li>{{genre.name}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="down">
+            <div class="status">
+                <p>{{details.get_status_display}}</p>
+                <form action="{% url 'animes' email=user.email id=id %}" method="post">
+                    {% csrf_token %}
+                    <label for=""><input type="radio" name="status" id="choice" value="CW">Currently Watching</label>
+                    <label for=""><input type="radio" name="status" id="choice" value="PW">Plan to watch</label>
+                    <label for=""><input type="radio" name="status" id="choice" value="C">Completed</label>
+                </form>
+            </div>
+            <button type="submit" data-url="{{Anime.link}}">Watch Now!</button>
+        </div>
+    </div>
+    <script src="{% static 'animescript.js' %}"></script>
+{% endblock main %}

@@ -1,0 +1,339 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    min-height: 100vh;
+    width: 100vw;
+}
+header{
+    height: 10vh;
+    width: 100vw;
+    background-color: #0F0F1A;
+    color: #EAEAEA;
+    display: grid;
+    grid-template-rows: 10vh;
+    grid-template-columns: 25vw 70vw 5vw;
+    justify-content: space-evenly;
+    align-content: space-around;
+    justify-items: center;
+    align-items: center;
+    z-index: 500;
+    position: sticky;
+    top: 0;
+}
+#title{
+    color: #FF4C29;
+    font-size: 3vw;
+    margin-right: 20vw;
+}
+#searchbar{
+    height: 10vh;
+    width: 25vw;
+    display: grid;
+    grid-template-rows: 8vh;
+    grid-template-columns: 17vw 7vw;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+}
+#anime_name{
+    height: 4vh;
+    width: 15vw;
+    border: 2px solid #00ADB5;
+    border-radius: 5px;
+}
+#hs{
+    height: 4vh;
+    width: 7vw;
+    background-color: #FF4C29;
+    color: #FFFFFF;
+    border: 2px solid #00ADB5;
+    border-radius: 5px;
+    transition: background-color 200ms linear, transform 200ms linear;
+}
+#hs:hover{
+    background-color: #00ADB5;
+    transform: scale(1.05);
+}
+.suggestions{
+    min-height: 4vh;
+    max-height: 20vh;
+    min-width: 15vw;
+    border: 2px solid #00ADB5;
+    border-radius: 5px;
+    background-color: #0F0F1A;
+    position: absolute;
+    color: #EAEAEA;
+    z-index: 900;
+    top: 8vh;
+    left: 1.5vw;
+    visibility: hidden;
+    opacity: 0;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: visibility 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+.suggestions p{
+    margin: 5px;
+}
+.suggestions p:hover{
+    color: #FF4C29;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.suggestions.visible{
+    visibility: visible;
+    opacity: 1;
+}
+.cover{
+    height: 8vh;
+    width: 8vh;
+    border: 2px solid #FF4C29;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.cover img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.cover:hover{
+    transform: scale(1.05);
+    border: 2px solid #00ADB5; 
+    cursor: pointer;
+}
+.extra{
+    position: fixed;
+    top: 10vh;
+    left: 10vw;
+    height: 80vh;
+    width: 80vw;
+    border: 2px solid #00ADB5;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #0F0F1A;
+    color: #EAEAEA;
+    z-index: 1001;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 300ms linear, opacity 300ms linear;
+}
+.extra.act{
+    visibility: visible;
+    opacity: 1;
+}
+.extra h3{
+    color: #FF4C29;
+}
+.extra img{
+    height: 40vh;
+    width: auto;
+    border: 2px solid #00ADB5;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+.extra .name{
+    height: 10vh;
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.extra .animename{
+    height: 10vh;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+.animename div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#logout{
+    height: 10vh;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#logout button{
+    height: 5vh;
+    width: 20%;
+    background-color: #00ADB5;
+    color: #EAEAEA;
+    border: 2px solid #FF4C29;
+    border-radius: 5px;
+    transition: transform 300ms ease, background-color 300ms ease;
+}
+#logout button:hover{
+    transform: scale(1.05);
+    background-color: #FF4C29;
+    cursor: pointer;
+}
+main{
+    min-height: 80vh;
+    width: 100vw;
+    background-color: #1A1A2E;
+    color: #EAEAEA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+section{
+    min-height: 60vh;
+    width: 90vw;
+    margin: 2vh 2vw;
+    background-color: #222831;
+    border: 2px solid #00ADB5;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: border 300ms ease, transform 300ms ease;
+}
+section h2{
+    height: 10vh;
+    width: 90vw;
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    min-height: 50vh;
+    width: 90vw;
+    border-radius: 0px 0px 20px 20px;
+    display: grid;
+    grid-template-columns: repeat(7, 12vw);
+    gap: 0.5vh 0.5vw;
+}
+.list{
+    height: 40vh;
+    width: 12vw;
+    border: 2px solid #00ADB5;
+    border-radius: 10px;
+    margin: 0.5vh 1.5vw;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 30vh 10vh;
+    grid-template-columns: 12vw;
+    justify-items: center;
+    align-items: center;
+    overflow: hidden;
+    transition: border 300ms ease, transform 300ms ease;
+}
+.list img{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px 10px 0px, 0px;
+    object-fit: cover;
+}
+.list:hover{
+    border: 2px solid #FF4C29; 
+    transform: scale(1.02);
+    cursor: pointer;
+}
+.form{
+    height: 60vh;
+    width: 40vw;
+    position: fixed;
+    top: 20vh;
+    left: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid #00ADB5;
+    border-radius: 50px;
+    background-color: #0F0F1A;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 300ms linear, opacity 300ms linear;
+}
+.form h1{
+    color: #FF4C29;
+}
+.form form{
+    height: 40vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.form input{
+    height: 5vh;
+    width: 23vw;
+}
+.change{
+    height: 5vh;
+    width: 5vw;
+}
+.change:hover{
+    color: #FF4C29;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.submit{
+    height: auto;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit input{
+    background-color: #00ADB5;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 300ms ease;
+}
+.submit input:hover{
+    background-color: #FF4C29;
+    transform: scale(1.05);
+}
+#overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 600;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 300ms linear, opacity 300ms linear;
+}
+.form.act, #overlay.act{
+    visibility: visible;
+    opacity: 1;
+}
+footer{
+    height: 10vh;
+    width: 100vw;
+    background-color: #0F0F1A;
+    color: #FF4C29;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
